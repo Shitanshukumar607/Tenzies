@@ -10,19 +10,43 @@ function App() {
       let obj = {};
       obj.value = Math.ceil(Math.random() * 6);
       obj.isHeld = true;
+      obj.id = i;
+      obj.key = i;
       newDice.push(obj);
     }
     return newDice;
   }
 
-  console.log(dice);
+  function holdDice(id) {
+    console.log(id);
+
+    setDice((prevState) => {
+      return prevState.map((die) => {
+        if (die.id === id) {
+          return { ...die, isHeld: !die.isHeld };
+        } else {
+          return { ...die };
+        }
+      });
+    });
+
+    console.log(dice);
+  }
 
   function rollDice() {
     setDice(allNewDice());
   }
 
-  const diceElements = dice.map((die) => (
-    <Die value={die.value} isHeld={die.isHeld} />
+  const diceElements = dice.map((die, index) => (
+    <Die
+      key={die.key}
+      value={die.value}
+      isHeld={die.isHeld}
+      id={die.id}
+      holdDice={() => {
+        holdDice(index);
+      }}
+    />
   ));
 
   return (
