@@ -60,3 +60,7 @@ main button {
   font-size: 2rem;
   font-family: "Poppins", sans-serif;
 }
+
+.is-held {
+  background-color: #59e391;
+}

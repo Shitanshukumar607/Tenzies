@@ -9,17 +9,21 @@ function App() {
     for (let i = 0; i < 10; i++) {
       let obj = {};
       obj.value = Math.ceil(Math.random() * 6);
-      obj.isHeld = false;
+      obj.isHeld = true;
       newDice.push(obj);
     }
     return newDice;
   }
 
+  console.log(dice);
+
   function rollDice() {
     setDice(allNewDice());
   }
 
-  const diceElements = dice.map((die) => <Die value={die.value} />);
+  const diceElements = dice.map((die) => (
+    <Die value={die.value} isHeld={die.isHeld} />
+  ));
 
   return (
     <main>
