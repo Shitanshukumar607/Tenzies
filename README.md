@@ -29,8 +29,8 @@ Tenzies is a digital adaptation of the classic dice game Tenzi, built using Reac
 
 ## Screenshots
 
-![Gameplay](screenshots/gameplay.png)
-![Game End](screenshots/gameend.png)
+![Gameplay](public/screenshots/gameplay.png)
+![Game End](public/screenshots/gameend.png)
 
 ## Contributing
 
