@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Die from "./Die";
 import { nanoid } from "nanoid";
-// import default from "@react-hook/window-size";
+import { useWindowSize } from "@react-hook/window-size";
 import Confetti from "react-confetti";
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
 
     if (allSameValue && allHeld) {
       setTenzies(true);
-      console.log("win");
     }
   }, [dice]);
 
@@ -48,16 +47,19 @@ function App() {
         }
       });
     });
-
-    console.log(dice);
   }
 
   function rollDice() {
-    setDice((prevState) => {
-      return prevState.map((die) => {
-        return die.isHeld ? die : generateNewDie();
+    if (tenzies) {
+      setTenzies(false);
+      setDice(allNewDice());
+    } else {
+      setDice((prevState) => {
+        return prevState.map((die) => {
+          return die.isHeld ? die : generateNewDie();
+        });
       });
-    });
+    }
   }
 
   const diceElements = dice.map((die, index) => (
@@ -72,13 +74,11 @@ function App() {
     />
   ));
 
+  const [width, height] = useWindowSize();
+
   return (
     <main>
-      {tenzies && (
-        <Confetti
-        // height={useWindowSize.height} width={useWindowSize.width}
-        />
-      )}
+      {tenzies && <Confetti height={height} width={width} />}
       <h1>Tenzies</h1>
       <p>
         Roll until all dice are the same. Click each die to freeze it at its
