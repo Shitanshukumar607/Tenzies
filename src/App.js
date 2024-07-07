@@ -36,8 +36,6 @@ function App() {
   }
 
   function holdDice(id) {
-    console.log(id);
-
     setDice((prevState) => {
       return prevState.map((die) => {
         if (die.id === id) {
